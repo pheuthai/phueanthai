@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบลงคะแนน พรรคเพื่อนไทย</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <!-- ===== SECTION: ระบบลงคะแนนเสียง ===== -->
+    <section class="voting-section">
+        <div class="voting-container">
+            <!-- ด้านซ้าย: ผลการลงคะแนน -->
+            <div class="voting-left">
+                <h3 class="voting-title"><i class="fa-solid fa-chart-simple" style="color: blueviolet;"></i>
+                    ผลการลงคะแนน</h3>
+
+                <!-- จอที่ 1: จำนวนผู้แสดงตน (Skeleton) -->
+                <div class="voting-display display-attend" id="attendDisplay">
+                    <div class="display-label"><i class="fa-solid fa-user" style="color: darkred;"></i> ผู้แสดงตน</div>
+                    <div class="display-number" id="attendCount">0</div>
+                    <div class="display-unit">คน</div>
+                </div>
+
+                <!-- จอที่ 2: สถิติการลงคะแนน (Skeleton) -->
+                <div class="voting-display display-stats" id="statsDisplay">
+                    <div class="stats-grid">
+                        <div class="stat-item skeleton-stat">
+                            <span class="stat-label"><i class="fa-regular fa-clipboard"></i> จำนวนผู้ลงมติ</span>
+                            <span class="stat-number skeleton-number" id="totalVotes">0</span>
+                        </div>
+                        <div class="stat-item stat-agree skeleton-stat">
+                            <span class="stat-label"><i class="fa-regular fa-thumbs-up"></i> เห็นด้วย</span>
+                            <span class="stat-number skeleton-number" id="agreeCount">0</span>
+                        </div>
+                        <div class="stat-item stat-disagree skeleton-stat">
+                            <span class="stat-label"><i class="fa-regular fa-thumbs-down"></i> ไม่เห็นด้วย</span>
+                            <span class="stat-number skeleton-number" id="disagreeCount">0</span>
+                        </div>
+                        <div class="stat-item stat-abstain skeleton-stat">
+                            <span class="stat-label"><i class="fa-regular fa-circle-stop"></i> งดออกเสียง</span>
+                            <span class="stat-number skeleton-number" id="abstainCount">0</span>
+                        </div>
+                        <div class="stat-item stat-notvote skeleton-stat">
+                            <span class="stat-label"><i class="fa-brands fa-creative-commons-zero"></i>
+                                ไม่ลงคะแนน</span>
+                            <span class="stat-number skeleton-number" id="notVoteCount">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ด้านขวา: ระบบลงคะแนน -->
+            <div class="voting-right">
+                <h3 class="voting-title"><i class="fa-solid fa-check-to-slot" style="color: #22c55e;"></i> ลงคะแนนเสียง
+                </h3>
+
+                <!-- ขั้นตอนที่ 1: ค้นหาชื่อ -->
+                <div class="vote-step">
+                    <div class="step-label">ขั้นตอนที่ 1: ค้นหาชื่อผู้ลงคะแนน</div>
+                    <div class="search-box">
+                        <input type="text" id="memberSearch" placeholder="พิมพ์ชื่อผู้ลงคะแนน..." class="search-input">
+                        <button id="searchBtn" class="search-btn">ค้นหา</button>
+                    </div>
+                    <div id="searchResult" class="search-result"></div>
+                </div>
+
+                <!-- ขั้นตอนที่ 2: แสดง Barcode และยืนยันตัวตน -->
+                <div class="vote-step" id="barcodeStep" style="display: none;">
+                    <div class="step-label">ขั้นตอนที่ 2: สแกนบาร์โค้ดเพื่อยืนยันตัวตน</div>
+                    <div class="barcode-container">
+                        <div class="barcode-image" id="barcodeImage">
+                            <img id="barcodeImg" src="" alt="Barcode">
+                        </div>
+                        <div class="barcode-input">
+                            <input type="text" id="barcodeInput" placeholder="กรอกรหัสบาร์โค้ด..." class="search-input">
+                            <button id="verifyBtn" class="verify-btn">ยืนยัน</button>
+                        </div>
+                        <div id="verifyResult" class="verify-result"></div>
+                    </div>
+                </div>
+
+                <!-- ขั้นตอนที่ 3: ปุ่มลงคะแนน -->
+                <div class="vote-step" id="voteButtons" style="display: none;">
+                    <div class="step-label">ขั้นตอนที่ 3: เลือกคะแนนเสียง</div>
+                    <div class="vote-buttons">
+                        <button class="vote-btn btn-attend" id="voteAttend"><i class="fa-solid fa-user"
+                                style="color: #333;"></i> แสดงตน</button>
+                        <button class="vote-btn btn-agree" id="voteAgree"><i class="fa-regular fa-thumbs-up"
+                                style="color: #22c55e;"></i> เห็นด้วย</button>
+                        <button class="vote-btn btn-disagree" id="voteDisagree"><i class="fa-regular fa-thumbs-down"
+                                style="color: #ef4444;"></i> ไม่เห็นด้วย</button>
+                        <button class="vote-btn btn-abstain" id="voteAbstain"><i class="fa-regular fa-circle-stop"
+                                style="color: #eab308;"></i> งดออกเสียง</button>
+                    </div>
+                    <div id="voteResult" class="vote-result"></div>
+                </div>
+
+                <!-- ขั้นตอนที่ 4: Admin Panel (เฉพาะประธาน/รองประธาน) -->
+                <div class="vote-step" id="adminPanel" style="display: none;">
+                    <div class="step-label"><i class="fa-solid fa-shield-halved" style="color: #ff6600;"></i>
+                        แผงควบคุมผู้ดูแลระบบ</div>
+                    <div class="admin-container">
+                        <div class="admin-row">
+                            <input type="password" id="resetPassword" placeholder="กรอกรหัสผ่าน..." class="search-input"
+                                style="flex:1;">
+                            <button id="resetBtn" class="reset-btn"><i class="fa-solid fa-rotate"></i>
+                                รีเซ็ตการลงคะแนน</button>
+                        </div>
+                        <div id="resetResult" class="reset-result"></div>
+                        <div class="admin-warning">
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #eab308;"></i>
+                            <small>⚠️ การรีเซ็ตจะล้างข้อมูลการแสดงตนและคะแนนทั้งหมด</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="/assets/js/votesys.js"></script>
+
+</body>
+
+</html>
