@@ -1,0 +1,517 @@
+:root {
+    --background: #fff;
+    --foreground: #fff;
+    --border: #666;
+    --primary: #e60012;
+    --success: #1ba702;
+    --inject: #666;
+    --dot: #9f9f9f;
+    --footer: #f5f5f5;
+    
+    --c-1: linear-gradient(135deg, #ff6600, #d30303);
+}
+
+::selection {
+    background: #ffa600;
+    color: #000;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Anuphan", sans-serif;
+
+}
+
+/* ===== VOTING SECTION ===== */
+.voting-section {
+    padding: 60px 32px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-top: 1px solid #f0f0f0;
+}
+
+.voting-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.voting-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 24px 0;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* ===== ด้านซ้าย: ผลการลงคะแนน ===== */
+.voting-left {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.voting-display {
+    background: #fafafa;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid #e8e8e8;
+}
+
+.display-attend {
+    background: linear-gradient(135deg, #fff8f0, #ffffff);
+    border-left: 4px solid #ff6600;
+}
+
+.display-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.display-number {
+    font-size: 4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ff6600, #d30303);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+}
+
+.display-unit {
+    font-size: 1rem;
+    color: #999;
+    font-weight: 500;
+}
+
+/* สถิติ */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.stat-item {
+    background: #ffffff;
+    padding: 12px 16px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #f0f0f0;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.stat-number {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
+.stat-agree .stat-number { color: #22c55e; }
+.stat-disagree .stat-number { color: #ef4444; }
+.stat-abstain .stat-number { color: #eab308; }
+.stat-notvote .stat-number { color: #94a3b8; }
+
+/* ===== ด้านขวา: ระบบลงคะแนน ===== */
+.voting-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.vote-step {
+    background: #fafafa;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid #e8e8e8;
+}
+
+.step-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+}
+
+/* ช่องค้นหา */
+.search-box {
+    display: flex;
+    gap: 12px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e8e8e8;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+    font-family: inherit;
+}
+
+.search-input:focus {
+    border-color: #ff6600;
+    box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.08);
+}
+
+.search-btn, .verify-btn {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #ff6600, #d30303);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+
+.search-btn:hover, .verify-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 102, 0, 0.25);
+}
+
+.search-result, .verify-result, .vote-result {
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+}
+
+.search-result.success {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+}
+
+.search-result.error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+}
+
+/* Barcode */
+.barcode-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.barcode-image {
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 12px;
+    border: 2px solid #e8e8e8;
+}
+
+.barcode-image img {
+    max-width: 200px;
+    height: auto;
+    display: block;
+}
+
+.barcode-input {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+/* ปุ่มโหวต */
+.vote-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.vote-btn {
+    padding: 16px 20px;
+    border: 2px solid #e8e8e8;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #ffffff;
+    color: #1a1a2e;
+    font-family: inherit;
+}
+
+.vote-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.vote-btn:active {
+    transform: scale(0.96);
+}
+
+.btn-attend {
+    background: #ffffff;
+    border-color: #94a3b8;
+}
+.btn-attend:hover { border-color: #64748b; background: #f8fafc; }
+
+.btn-agree {
+    background: #22c55e;
+    border-color: #22c55e;
+    color: #fff;
+}
+.btn-agree:hover { background: #16a34a; border-color: #16a34a; }
+
+.btn-disagree {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: #fff;
+}
+.btn-disagree:hover { background: #dc2626; border-color: #dc2626; }
+
+.btn-abstain {
+    background: #eab308;
+    border-color: #eab308;
+    color: #fff;
+}
+.btn-abstain:hover { background: #ca8a04; border-color: #ca8a04; }
+
+.vote-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .voting-container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    .voting-section {
+        padding: 40px 20px 60px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .vote-buttons {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .display-number {
+        font-size: 3rem;
+    }
+    
+    .search-box, .barcode-input {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .voting-section {
+        padding: 30px 16px 40px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .vote-buttons {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== SKELETON LOADER ===== */
+.skeleton-number {
+    display: inline-block;
+    min-width: 60px;
+    height: 50px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+}
+
+.skeleton-stat {
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton-stat .stat-number {
+    display: inline-block;
+    min-width: 40px;
+    height: 28px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 6px;
+}
+
+/* Skeleton สำหรับปุ่มค้นหา */
+.search-box .search-input.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border: none;
+}
+
+/* Skeleton สำหรับปุ่ม */
+.vote-btn.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border: none;
+    color: transparent;
+    pointer-events: none;
+}
+
+/* Skeleton สำหรับบาร์โค้ด */
+.barcode-image.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    min-height: 120px;
+    min-width: 200px;
+    border-radius: 12px;
+}
+
+/* Skeleton สำหรับผลลัพธ์ */
+.search-result.skeleton {
+    height: 60px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 10px;
+    border: none;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ✅ เมื่อโหลดเสร็จ ให้แสดงปกติ */
+.skeleton-number.loaded,
+.skeleton-stat.loaded .stat-number,
+.skeleton-stat.loaded {
+    animation: none !important;
+    background: transparent !important;
+}
+
+.skeleton-number.loaded {
+    min-width: auto;
+    height: auto;
+}
+
+/* ===== ADMIN PANEL ===== */
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.admin-row {
+    display: flex;
+    gap: 12px;
+}
+
+.reset-btn {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-family: inherit;
+    white-space: nowrap;
+}
+
+.reset-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
+}
+
+.reset-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.reset-result {
+    margin-top: 4px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+.reset-result.success {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+}
+
+.reset-result.error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+}
+
+.reset-result.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border: none;
+    color: transparent;
+    min-height: 40px;
+}
+
+.admin-warning {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: #fefce8;
+    border-radius: 8px;
+    border: 1px solid #fde68a;
+    color: #92400e;
+    font-size: 0.8rem;
+}
+
+.admin-warning i {
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .admin-row {
+        flex-direction: column;
+    }
+    
+    .reset-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
